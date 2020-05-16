@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./js/lib/PaperJS/dist/paper-full.js"></script>
+    <script type="text/paperscript" canvas="myCanvas">
+        var myCircle = new Path.Circle(new Point(100, 70), 10);
+        myCircle.fillColor = 'black';
+        var circleTwo = new Path.Circle(new Point(50, 50), 80);
+        circleTwo.fillColor = 'black';
+    </script>
+    <link rel="stylesheet" type="text/CSS" href="./CSS/style.css">
+    <title>Forms</title>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" resize></canvas>
+</body>
+
+</html>
