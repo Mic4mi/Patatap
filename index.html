@@ -7,34 +7,52 @@
     <script type="text/javascript" src="./js/lib/PaperJS/dist/paper-full.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
     <script type="text/paperscript" canvas="myCanvas">
-
-        var sound = new Howl({
-            src: ['sounds/sounds/bubbles.mp3']
-          });
-
+        var keyData = {
+            a: {
+                color: "purple",
+                sound: new Howl({
+                    src: ['sounds/sounds/bubbles.mp3']
+                })
+            },
+            b: {
+                color: "green",
+                sound: new Howl({
+                    src: ['sounds/sounds/clay.mp3']
+                })
+            },
+            c: {
+                color: "yellow",
+                sound: new Howl({
+                    src: ['sounds/sounds/confetti.mp3']
+                })
+            },
+        };
+        
         var circles = [];
-
-function onKeyDown(event) {
-    sound.play()
-    // Establece los límites de dónde puede aparecer el circulo nuevo
-    var maxPoint = new Point(view.size.width, view.size.height);
-    // obetener un punto aleatorio ya viene incorporado en paperJS
-    var randomPoint = Point.random();
-    // Es un paralelo de math random * math floor
-    var point = maxPoint * randomPoint;
-    var newCircle = new Path.Circle(point, 300);
-    newCircle.fillColor = "orange";
-    circles.push(newCircle);
-}
-
-function onFrame() {
-    // Hay que recorrer la lista de circulos para añadirles la animación a c/u
-    for (var i = 0; i < circles.length; i++) {
-        // Cambia el color del objeto
-        circles[i].fillColor.hue += 1;
-        circles[i].scale(.9);
-    }
-}
+        
+        function onKeyDown(event) {
+            if (keyData[event.key]) {
+                // Establece los límites de dónde puede aparecer el circulo nuevo
+                var maxPoint = new Point(view.size.width, view.size.height);
+                // obetener un punto aleatorio ya viene incorporado en paperJS
+                var randomPoint = Point.random();
+                // Es un paralelo de math random * math floor
+                var point = maxPoint * randomPoint;
+                var newCircle = new Path.Circle(point, 300);
+                newCircle.fillColor = keyData[event.key].color;
+                keyData[event.key].sound.play();
+                circles.push(newCircle);
+            }
+        }
+        
+        function onFrame() {
+            // Hay que recorrer la lista de circulos para añadirles la animación a c/u
+            for (var i = 0; i < circles.length; i++) {
+                // Cambia el color del objeto
+                circles[i].fillColor.hue += 1;
+                circles[i].scale(.9);
+            }
+        }
     </script>
     <link rel="stylesheet" type="text/CSS" href="./CSS/style.css">
     <title>Forms</title>
